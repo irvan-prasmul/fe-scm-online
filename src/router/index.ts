@@ -1,3 +1,4 @@
+import { Global } from "@/stores/globals";
 import { User } from "@/stores/user";
 import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 
@@ -8,6 +9,7 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/auth/LoginView.vue"),
     meta: {
       requireAuth: false,
+      layout: "none",
     },
   },
   {
@@ -16,6 +18,25 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("../views/home/DashboardView.vue"),
     meta: {
       requireAuth: false,
+      layout: "default",
+    },
+  },
+  {
+    path: "/home/TestView1",
+    name: "TestView1",
+    component: () => import("../views/home/TestView1.vue"),
+    meta: {
+      requireAuth: false,
+      layout: "default",
+    },
+  },
+  {
+    path: "/home/TestView2",
+    name: "TestView2",
+    component: () => import("../views/home/TestView2.vue"),
+    meta: {
+      requireAuth: false,
+      layout: "default",
     },
   },
 ];
@@ -27,6 +48,9 @@ const router = createRouter({
 
 // "MIDDLEWARE"
 router.beforeEach((to, from, next) => {
+  if (to.meta.layout && typeof to.meta.layout == "string") {
+    Global.currentLayout = to.meta.layout;
+  }
   const isAuth: boolean = User.isAuth();
   console.log("beforeEach");
   if (to.path == "/") {

@@ -1,12 +1,29 @@
 <template>
-  <nav>
-    <router-link to="/login">Home</router-link> |
-    <router-link to="/home/dashboard">About</router-link>
-  </nav>
-  <router-view />
+  <MainLayout :module="layoutModule">
+    <nav>
+      <router-link to="/login">Home</router-link> |
+      <router-link to="/home/dashboard">About</router-link>
+    </nav>
+    <router-view />
+  </MainLayout>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { onMounted, ref, watch } from "vue";
+import MainLayout from "./layouts/MainLayout.vue";
+import { Global } from "./stores/globals";
+import { User } from "./stores/user";
+
+const layoutModule = ref("none");
+
+watch(Global, (data) => {
+  layoutModule.value = data.currentLayout;
+});
+
+onMounted(() => {
+  User.isAuth();
+});
+</script>
 
 <style>
 #app {

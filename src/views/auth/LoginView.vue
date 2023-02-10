@@ -159,6 +159,12 @@ const submit = async (event: any) => {
     //   formLogin.password
     // );
     // if (typeof response == "string") throw Error(response);
+    // bypass login
+    sessionStorage.setItem(
+      "userData",
+      JSON.stringify({ name: "irvan", userToken: "testToken" })
+    );
+    localStorage.setItem("userToken", "testToken");
     router.push({ name: "dashboard" });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {

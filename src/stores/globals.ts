@@ -1,10 +1,17 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import pinia from "@/plugins/pinia";
+import { defineStore } from "pinia";
 import axios from "axios";
 import { User } from "@/stores/user";
 import router from "@/router";
 
-export default {
-  methods: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+const useGlobalStore = defineStore("globalStore", {
+  state: () => {
+    return {
+      currentLayout: "none",
+    };
+  },
+  actions: {
     handleAxiosError(e: any) {
       if (
         (axios.isAxiosError(e) && typeof e.response?.status == "number",
@@ -27,4 +34,6 @@ export default {
       return "";
     },
   },
-};
+});
+
+export const Global = useGlobalStore(pinia);

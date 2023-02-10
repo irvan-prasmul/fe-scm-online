@@ -6,7 +6,7 @@ axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 axios.interceptors.request.use(
   (config) => {
-    const token = User.access_token;
+    const token = User.userToken;
     if (token) {
       config.headers["Content-Type"] = "application/json";
       config.headers.Authorization = `Bearer ${token}`;

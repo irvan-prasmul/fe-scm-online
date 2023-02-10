@@ -1,18 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AuthenticationApis } from "@/api/authentication";
 import pinia from "@/plugins/pinia";
 import { defineStore } from "pinia";
-import Mixins from "@/mixins";
 import router from "@/router";
+import { Global } from "./globals";
 
 const useUserStore = defineStore("userStore", {
   state: () => {
     return {
       isAuthUser: false,
-      access_token: "",
+      userToken: "",
       name: "",
-      email: "",
       backRoute: "",
-      hasPassword: true,
+      // hasPassword: true,
     };
   },
   actions: {
@@ -24,37 +24,35 @@ const useUserStore = defineStore("userStore", {
     },
 
     getAuthStorage() {
-      const auth = localStorage.getItem("authState");
-      if (auth !== null) {
-        const jsonAuth = JSON.parse(auth).userStore;
+      const session = sessionStorage.getItem("userData");
+      if (session !== null) {
+        const jsonSession = JSON.parse(session).userStore;
 
-        const isEmpty = Object.values(jsonAuth).every(
+        const isEmpty = Object.values(jsonSession).every(
           (x) => x === null || x === ""
         );
+        if (!isEmpty) {
+          this.setAuth(true, jsonSession.userToken, jsonSession.name);
+          return;
+        }
+      }
 
-        if (!isEmpty)
-          this.setAuth(
-            true,
-            jsonAuth.access_token,
-            jsonAuth.name,
-            jsonAuth.email,
-            jsonAuth.hasPassword
-          );
+      const token = localStorage.getItem("userToken");
+      if (token != null) {
+        this.userToken = token;
+        this.getUserDetails();
       }
     },
 
-    setAuth(
-      isAuthUser: boolean,
-      token: string,
-      name: string,
-      email: string,
-      hasPassword: boolean
-    ) {
-      this.access_token = token;
+    setAuth(isAuthUser: boolean, token: string, name: string) {
+      this.userToken = token;
       this.isAuthUser = isAuthUser;
       this.name = name;
-      this.email = email;
-      this.hasPassword = hasPassword;
+      sessionStorage.setItem(
+        "userData",
+        JSON.stringify({ name, userToken: token })
+      );
+      localStorage.setItem("userToken", "testToken");
     },
 
     async removeAuth() {
@@ -62,10 +60,23 @@ const useUserStore = defineStore("userStore", {
       try {
         await AuthenticationApis.getLogout();
       } catch (e) {
-        Mixins.methods.handleAxiosError(e);
+        Global.handleAxiosError(e);
       }
-      this.setAuth(false, "", "", "", true);
+      this.setAuth(false, "", "");
       router.push({ name: "login" });
+    },
+
+    async getUserDetails() {
+      try {
+        const response = await AuthenticationApis.getUserDetails();
+        if (response.status === 200) {
+          const data = response.data;
+          this.setAuth(true, data.access_token, data.name);
+          return null;
+        }
+      } catch (e: any) {
+        return Global.handleAxiosError(e);
+      }
     },
 
     async attempLogin(email: string, password: string) {
@@ -76,17 +87,11 @@ const useUserStore = defineStore("userStore", {
         });
         if (response.status === 200) {
           const data = response.data;
-          this.setAuth(
-            true,
-            data.access_token,
-            data.name,
-            data.email,
-            data.has_password
-          );
+          this.setAuth(true, data.access_token, data.name);
           return null;
         }
       } catch (e: any) {
-        return Mixins.methods.handleAxiosError(e);
+        return Global.handleAxiosError(e);
       }
     },
 
@@ -97,17 +102,11 @@ const useUserStore = defineStore("userStore", {
         });
         if (response.status === 200) {
           const data = response.data;
-          this.setAuth(
-            true,
-            data.access_token,
-            data.name,
-            data.email,
-            data.has_password
-          );
+          this.setAuth(true, data.access_token, data.name);
           return null;
         }
       } catch (e: any) {
-        return Mixins.methods.handleAxiosError(e);
+        return Global.handleAxiosError(e);
       }
     },
   },

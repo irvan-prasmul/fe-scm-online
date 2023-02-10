@@ -1,5 +1,5 @@
 <template>
-  <div v-for="i in 30" :key="i">DASHBOARD</div>
+  <div>TEST 2</div>
 </template>
 
 <script lang="ts" setup>

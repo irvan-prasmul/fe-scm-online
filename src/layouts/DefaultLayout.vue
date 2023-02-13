@@ -12,7 +12,14 @@
         showOneChild
         relative
         hideToggle
-      />
+        width="256px"
+      >
+        <!-- <template v-slot:toggle-icon>toggle-icon</template>
+        <template v-slot:dropdown-icon="{ isOpen }">
+          <span v-if="!isOpen">+</span>
+          <span v-else>-</span>
+        </template> -->
+      </sidebar-menu>
     </v-navigation-drawer>
 
     <v-app-bar>
@@ -21,7 +28,6 @@
     </v-app-bar>
 
     <v-main>
-      <!-- {{ selectedMenu }} -->
       <slot />
     </v-main>
   </v-app>
@@ -37,45 +43,90 @@ const menu = ref([
     icon: "mdi mdi-home",
   },
   {
-    title: "Reservation",
-    icon: "mdi mdi-list-box",
-    child: [
-      {
-        href: "/reservation/approval",
-        icon: "mdi mdi-list-status",
-        title: "Approval",
-      },
-    ],
-  },
-  {
-    title: "FPB",
+    href: "/fpb/list",
+    title: "FPB List",
     icon: "mdi mdi-cart",
-    child: [
-      {
-        href: "/fpb/receipt",
-        icon: "mdi mdi-receipt-text",
-        title: "Receipt",
-      },
-    ],
-  },
-  {
-    href: "/stock-opname",
-    title: "Stock Opname",
-    icon: "mdi mdi-stethoscope",
   },
   {
     title: "Master",
     icon: "mdi mdi-dropbox",
     child: [
       {
-        href: "/master/material",
-        icon: "mdi mdi-package-variant-closed",
-        title: "Material",
+        href: "/master/user",
+        title: "User",
+        icon: "mdi mdi-share",
+      },
+      {
+        href: "/master/config-pjb",
+        title: "Config PJB",
+        icon: "mdi mdi-share",
+      },
+    ],
+  },
+  {
+    title: "Reports",
+    icon: "mdi mdi-table",
+    child: [
+      {
+        href: "/reports/price-compare",
+        title: "Price Comparison",
+        icon: "mdi mdi-share",
+      },
+      {
+        title: "request",
+        icon: "mdi mdi-share",
+        child: [
+          {
+            href: "/reports/request/vendor",
+            title: "Vendor",
+            icon: "mdi mdi-circle-outline",
+          },
+          {
+            href: "/reports/request/material",
+            title: "Material",
+            icon: "mdi mdi-circle-outline",
+          },
+          {
+            href: "/reports/request/pic",
+            title: "PIC",
+            icon: "mdi mdi-circle-outline",
+          },
+          {
+            href: "/reports/request/department",
+            title: "Department",
+            icon: "mdi mdi-circle-outline",
+          },
+          {
+            href: "/reports/request/status",
+            title: "Status",
+            icon: "mdi mdi-circle-outline",
+          },
+        ],
+      },
+      {
+        href: "/reports/fpb-history",
+        title: "FPB History",
+        icon: "mdi mdi-share",
+      },
+      {
+        href: "/reports/fpb-all",
+        title: "FPB All",
+        icon: "mdi mdi-share",
+      },
+    ],
+  },
+  {
+    title: "Chart",
+    icon: "mdi mdi-chart-areaspline-variant",
+    child: [
+      {
+        href: "/chart/fpb",
+        title: "FPB",
+        icon: "mdi mdi-share",
       },
     ],
   },
 ]);
-//TODO #sidebar-menu > .v-sidebar-menu .vsm--link_level-1 .vsm--icon {
 </script>
 
 <style>
@@ -83,8 +134,13 @@ const menu = ref([
   background-color: transparent;
 }
 
-#sidebar-menu > .v-sidebar-menu .vsm--link_level-1 .vsm--icon {
-  background-color: transparent;
+.v-sidebar-menu .vsm--link_level-1 .vsm--icon {
+  background-color: transparent !important;
+}
+
+.v-sidebar-menu .vsm--link {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 
 nav a {

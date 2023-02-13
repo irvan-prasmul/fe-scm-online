@@ -28,6 +28,7 @@ const useUserStore = defineStore("userStore", {
       if (session !== null) {
         const jsonSession = JSON.parse(session).userStore;
 
+        if (!jsonSession) return;
         const isEmpty = Object.values(jsonSession).every(
           (x) => x === null || x === ""
         );

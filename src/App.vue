@@ -1,9 +1,9 @@
 <template>
   <MainLayout :module="layoutModule">
-    <nav>
+    <!-- <nav>
       <router-link to="/login">Home</router-link> |
       <router-link to="/home/dashboard">About</router-link>
-    </nav>
+    </nav> -->
     <router-view />
   </MainLayout>
 </template>
@@ -41,5 +41,9 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+html {
+  overflow-y: auto !important;
 }
 </style>

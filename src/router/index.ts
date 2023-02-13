@@ -15,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/home/dashboard",
     name: "dashboard",
-    component: () => import("../views/home/DashboardView.vue"),
+    component: () => import("../views/home/DashboardCarousel.vue"),
     meta: {
       requireAuth: false,
       layout: "default",

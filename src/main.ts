@@ -10,6 +10,8 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 // import Vue3EasyDataTable from "vue3-easy-data-table";
 // import "vue3-easy-data-table/dist/style.css";
 
+import "@/plugins/main.scss";
+
 const app = createApp(App);
 
 app.use(router);

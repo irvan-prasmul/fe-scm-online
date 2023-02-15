@@ -15,16 +15,6 @@
   </v-carousel>
 </template>
 
-<script lang="ts" setup>
-import router from "@/router";
-import { reactive, ref } from "vue";
-
-const isLoading = ref(false);
-const isError = ref(false);
-
-const errorMessage = ref("");
-</script>
-
 <style lang="scss">
 .carousel-dash {
   width: inherit;

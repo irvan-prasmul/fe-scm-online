@@ -17,7 +17,16 @@ const routes: Array<RouteRecordRaw> = [
     name: "dashboard",
     component: () => import("../views/home/DashboardCarousel.vue"),
     meta: {
-      requireAuth: false,
+      requireAuth: true,
+      layout: "default",
+    },
+  },
+  {
+    path: "/fpb",
+    name: "fpbMain",
+    component: () => import("../views/fpb/MainView.vue"),
+    meta: {
+      requireAuth: true,
       layout: "default",
     },
   },

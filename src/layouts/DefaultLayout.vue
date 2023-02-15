@@ -43,8 +43,8 @@ const menu = ref([
     icon: "mdi mdi-home",
   },
   {
-    href: "/fpb/list",
-    title: "FPB List",
+    href: "/fpb",
+    title: "FPB",
     icon: "mdi mdi-cart",
   },
   {

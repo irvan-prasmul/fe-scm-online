@@ -2,7 +2,7 @@ export const roles = {
   Requester: [
     {
       href: "/home/dashboard",
-      title: "Dashboard",
+      title: "Home",
       icon: "mdi mdi-home",
     },
     {
@@ -14,21 +14,21 @@ export const roles = {
   PJK: [
     {
       href: "/home/dashboard",
-      title: "Dashboard",
+      title: "Home",
       icon: "mdi mdi-home",
     },
   ],
   PJB: [
     {
       href: "/home/dashboard",
-      title: "Dashboard",
+      title: "Home",
       icon: "mdi mdi-home",
     },
   ],
   Warehouse: [
     {
       href: "/home/dashboard",
-      title: "Dashboard",
+      title: "Home",
       icon: "mdi mdi-home",
     },
     {
@@ -200,7 +200,7 @@ export const roles = {
   "Purchasing Head": [
     {
       href: "/home/dashboard",
-      title: "Dashboard",
+      title: "Home",
       icon: "mdi mdi-home",
     },
     {
@@ -291,7 +291,7 @@ export const roles = {
   "Reviewer ICT": [
     {
       href: "/home/dashboard",
-      title: "Dashboard",
+      title: "Home",
       icon: "mdi mdi-home",
     },
     {
@@ -303,7 +303,7 @@ export const roles = {
   "PIC Purchasing": [
     {
       href: "/home/dashboard",
-      title: "Dashboard",
+      title: "Home",
       icon: "mdi mdi-home",
     },
     {
@@ -315,7 +315,7 @@ export const roles = {
   "Reviewer Purchasing": [
     {
       href: "/home/dashboard",
-      title: "Dashboard",
+      title: "Home",
       icon: "mdi mdi-home",
     },
   ],

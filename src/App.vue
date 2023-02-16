@@ -1,10 +1,10 @@
 <template>
   <MainLayout :module="layoutModule">
-    <!-- <nav>
-      <router-link to="/login">Home</router-link> |
-      <router-link to="/home/dashboard">About</router-link>
-    </nav> -->
-    <router-view />
+    <router-view v-slot="{ Component }">
+      <transition name="fade">
+        <component :is="Component" />
+      </transition>
+    </router-view>
   </MainLayout>
 </template>
 
@@ -15,9 +15,11 @@ import { Global } from "./stores/globals";
 import { User } from "./stores/user";
 
 const layoutModule = ref("none");
+// const transitionDur = ref(500);
 
 watch(Global, (data) => {
   layoutModule.value = data.currentLayout;
+  // transitionDur.value = data.routerTransitionDuration;
 });
 
 onMounted(() => {
@@ -25,7 +27,7 @@ onMounted(() => {
 });
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -41,6 +43,16 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 
 html {

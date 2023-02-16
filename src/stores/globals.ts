@@ -9,6 +9,7 @@ const useGlobalStore = defineStore("globalStore", {
   state: () => {
     return {
       currentLayout: "none",
+      routerTransitionDuration: 300,
     };
   },
   actions: {

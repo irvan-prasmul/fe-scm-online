@@ -38,6 +38,11 @@ import { ref } from "vue";
 const drawer = ref(true);
 const menu = ref([
   {
+    href: "/",
+    title: "login",
+    icon: "mdi mdi-login",
+  },
+  {
     href: "/home/dashboard",
     title: "Dashboard",
     icon: "mdi mdi-home",

@@ -10,6 +10,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       requireAuth: false,
       layout: "none",
+      // transitionDuration: 1,
     },
   },
   {
@@ -24,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/fpb",
     name: "fpbMain",
-    component: () => import("../views/fpb/MainView.vue"),
+    component: () => import("../views/fpb/FpbIndexView.vue"),
     meta: {
       requireAuth: true,
       layout: "default",
@@ -57,6 +58,11 @@ const router = createRouter({
 
 // "MIDDLEWARE"
 router.beforeEach((to, from, next) => {
+  // if (from.name == "login") {
+  //   Global.routerTransitionDuration = 1;
+  //   next();
+  //   Global.routerTransitionDuration = 300;
+  // }
   if (to.meta.layout && typeof to.meta.layout == "string") {
     Global.currentLayout = to.meta.layout;
   }

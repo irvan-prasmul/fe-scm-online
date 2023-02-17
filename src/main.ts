@@ -9,6 +9,7 @@ import VueSidebarMenu from "vue-sidebar-menu";
 import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 import Vue3EasyDataTable from "vue3-easy-data-table";
 import "vue3-easy-data-table/dist/style.css";
+import VueLodash from "vue-lodash";
 
 import "@/plugins/main.scss";
 
@@ -20,4 +21,5 @@ app.use(VueAxios, axios);
 app.use(vuetify);
 app.use(VueSidebarMenu);
 app.component("EasyDataTable", Vue3EasyDataTable);
+app.use(VueLodash, { name: "custom", lodash: { Map } });
 app.mount("#app");
